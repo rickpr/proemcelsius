@@ -1,0 +1,8 @@
+$('form').hide();
+$('#prolog-table').show();
+$('#prolog').empty();
+<% @epilog.each do |epilog| %>
+  <% epilog.match(/NOT/).nil? ? color="success" : color="danger" %>
+  $('#prolog').append('<tr class="<%= j color %>"><td><%= j epilog %></td></tr>');
+<% end %>
+

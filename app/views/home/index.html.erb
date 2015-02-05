@@ -1,0 +1,14 @@
+<%= bootstrap_form_tag  url: '/prolog', remote: true do |f| %>
+  <%= f.select :track, options_from_collection_for_select(Predicate.all, :prolog, :name) %>
+  <%= f.select :course, grouped_options_for_select(@courses), {},{multiple: true} %>
+  <%= f.primary "Check Courses" %>
+<% end %>
+<table class="table table-striped" style="display:none" id="prolog-table">
+  <tbody id="prolog">
+  </tbody>
+</table>
+<br>
+<button class="btn btn-warning" onclick="location.reload();">Start Over</button>
+<script type="text/javascript">
+$('select').select2();
+</script>
