@@ -54,3 +54,8 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
 gem 'select2-rails'
+
+# HTTP Requests
+gem 'httparty'
+# Debugging
+gem 'pry-rails'

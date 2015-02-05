@@ -1,8 +1,16 @@
 $('form').hide();
 $('#prolog-table').show();
+$('#plan-table').show();
 $('#prolog').empty();
+$('#plan').empty();
 <% @epilog.each do |epilog| %>
   <% epilog.match(/NOT/).nil? ? color="success" : color="danger" %>
-  $('#prolog').append('<tr class="<%= j color %>"><td><%= j epilog %></td></tr>');
+  $('#prolog').append('<tr class="<%= j color %>"><td class="text-<%= j color %>"><%= j epilog %></td></tr>');
+<% end %>
+<% @plan.each.with_index 1 do |term,index| %>
+  $('#plan').append('<tr class="danger"><td class="text-warning">Term <%= index %></td></tr>');
+  <% term.each do |requirement| %>
+    $('#plan').append('<tr class="success"><td><%= requirement["name"] %></td></tr>');
+  <% end %>
 <% end %>
 
