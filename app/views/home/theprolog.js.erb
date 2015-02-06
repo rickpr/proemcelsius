@@ -1,6 +1,7 @@
 $('form').hide();
 $('#prolog-table').show();
-$('#plan-table').show();
+$('#plan').show();
+$('#reqs').show();
 $('#prolog').empty();
 $('#plan').empty();
 <% @epilog.each do |epilog| %>
@@ -8,9 +9,20 @@ $('#plan').empty();
   $('#prolog').append('<tr class="<%= j color %>"><td class="text-<%= j color %>"><%= j epilog %></td></tr>');
 <% end %>
 <% @plan.each.with_index 1 do |term,index| %>
-  $('#plan').append('<tr class="danger"><td class="text-warning">Term <%= index %></td></tr>');
-  <% term.each do |requirement| %>
-    $('#plan').append('<tr class="success"><td><%= requirement["name"] %></td></tr>');
+  var textToInsert = '';
+  textToInsert += '<div class="panel panel-default">';
+  textToInsert += '<div class="panel-heading"><h3 class="panel-title" style="color: #2aa198;">';
+  textToInsert += '<a data-toggle="collapse" href="#term<%= index  %>">';
+  textToInsert += 'Term <%= term[:term] %>';
+  textToInsert += '</a></h3></div>';
+  textToInsert += '<div class="panel-collapse collapse in" id="term<%= index %>">';
+  textToInsert += '<table class="table">';
+  textToInsert += '<tbody>';
+  <% term[:reqs].each do |req| %>
+    <% req[:satisfied] ? color="success" : color="danger" %>
+    textToInsert += '<tr class="<%= j color %>"><td class="text-<%= j color %>"><%= j req[:name] %></td></tr>'
   <% end %>
+  textToInsert += '</tbody></table></div></div></div>';
+  $('#plan').append(textToInsert);
 <% end %>
 
