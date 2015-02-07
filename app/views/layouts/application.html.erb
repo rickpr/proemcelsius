@@ -45,7 +45,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Degree Requirements</a>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav">
+            <li class="navbar-brand">Degree Requirements</li>
+            <li><%= image_tag "unm.jpg" %></li>
+            <li class="navbar-brand">You are logged in as <%= session[:cas_user] %> from UNM CAS</li>
+            <li><%= link_to "Log out", logout_path  %></li>
+          </ul>
+        </div>
       </div>
     </div>
 

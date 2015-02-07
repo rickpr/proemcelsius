@@ -3,17 +3,22 @@ class HomeController < ApplicationController
     @courses=Course.all.map(&:name).group_by{ |c| c.match(/^\S*/).to_s }.to_a
   end
 
+  def logout
+    RubyCAS::Filter.logout self
+  end
+
   def theprolog
     plan=degree_request params
     prolog=Prolego::Query.new Rails.root.join 'prolog','Top.pl'
     track=params["track"]
     courses=params["course"].reject &:empty?
     courses += course_request(params["unmid"]) unless params["unmid"].empty?
-    puts courses
     prolog.command track,["BS",courses]
     @epilog=prolog.epilog
     @plan=compare_reqs @epilog,plan
   end
+
+  private
 
   def degree_request params
     base_url="http://degrees.unm.edu/2014-15/"

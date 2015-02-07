@@ -1,3 +1,15 @@
+<script type="text/javascript">
+function restartform() {
+  $('#reqs').hide();
+  $('#plan').hide();
+  $('form').show();
+}
+
+function loading() {
+  $('form').hide();
+  $('#loading').show();
+}
+</script>
 <%= bootstrap_form_tag  url: '/prolog', remote: true do |f| %>
   <%= f.text_field :unmid, label: "UNM Banner ID" %>
   <%= f.radio_button :program, "4", label: "4 Year Plan"  %>
@@ -5,8 +17,9 @@
   <%= f.radio_button :program, "Starting", label: "Starting Math 150"  %>
   <%= f.select :track, options_from_collection_for_select(Predicate.all, :prolog, :name) %>
   <%= f.select :course, grouped_options_for_select(@courses), {},{multiple: true} %>
-  <%= f.primary "Check Courses" %>
+  <%= f.primary "Check Courses", onclick: "loading();" %>
 <% end %>
+<div id="loading" class="row text-center" style="display:none"><%= image_tag 'loading.gif' %></div>
 <div style="display:none" id="plan"></div>
 <div class="panel panel-default" id="reqs" style="display:none">
   <div class="panel-heading"><h3 class="panel-title">
@@ -20,7 +33,7 @@
   </div>
 </div>
 <br>
-<button class="btn btn-warning" onclick="location.reload();">Start Over</button>
+<button class="btn btn-warning" onclick="restartform();">Start Over</button>
 <script type="text/javascript">
 $('select').select2();
 </script>

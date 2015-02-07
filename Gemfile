@@ -59,3 +59,6 @@ gem 'select2-rails'
 gem 'httparty'
 # Debugging
 gem 'pry-rails'
+
+#CAS Authentication
+gem "rubycas-client-rails", git: "git://github.com/rubycas/rubycas-client-rails.git"
